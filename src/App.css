@@ -1,38 +1,257 @@
-.App {
+/* src/App.css */
+
+/* --- Globals & Resets --- */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text */
+  line-height: 1.7; /* Improved readability */
+  font-size: 17px; /* Slightly larger base font */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- Basic HTML Elements --- */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 600;
+  border-bottom: 1px solid #ccc; /* Light grey separator */
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.2em;
+}
+
+a {
+  color: #000000; /* Black links */
+  text-decoration: underline;
+  font-weight: 600; /* Make links stand out a bit */
+}
+
+a:hover, a:focus {
+  color: #555555; /* Dark grey on hover/focus */
+  text-decoration: none; /* Remove underline on hover for a change */
+}
+
+ul {
+  list-style: disc;
+  padding-left: 25px;
+}
+
+/* --- App Container --- */
+.app-container {
+  max-width: 800px; /* Readable content width */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Header --- */
+.header {
+  padding: 20px 0;
+  margin-bottom: 30px;
   text-align: center;
+  border-bottom: 2px solid #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-name {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-nav {
+  margin-top: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-nav a {
+  margin: 0 15px;
+  font-size: 1.1rem;
+  text-decoration: none; /* No underline for nav links */
+}
+
+.header-nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header-nav a {
+  margin: 0 15px;
+  font-size: 1.1rem;
+  text-decoration: none; /* No underline for nav links */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-nav {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header-nav a {
+  width: 50%;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.section:last-of-type {
+  margin-bottom: 0; /* No extra margin for the last section */
+}
+
+/* --- Portfolio Item --- */
+.portfolio-item {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee; /* Lighter separator for items */
+}
+
+.portfolio-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.portfolio-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.portfolio-item p {
+  margin-bottom: 0.8em;
+  color: #333; /* Slightly lighter for description text */
+}
+
+.portfolio-links a {
+  margin-right: 15px;
+  font-size: 0.95rem;
+}
+
+/* --- Buttons --- */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.button:hover, .button:focus {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+/* --- Certification Item --- */
+.certification-item {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee; /* Lighter separator for items */
+}
+
+.certification-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.certification-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+.certification-item p {
+  margin-bottom: 0.5em;
+  font-size: 0.95rem;
+}
+
+.certification-issuer,
+.certification-date {
+  color: #333; /* Slightly lighter for details */
+}
+
+.certification-link a {
+  font-weight: 600; /* Make the link stand out */
+}
+
+/* Optional: Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+.app-container {
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.header-name {
+  font-size: 2rem;
+}
+
+.header-nav a {
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+.header-nav {
+  margin-top: 10px;
+}
+
+.header-nav a {
+  width: auto;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.section {
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.portfolio-links a {
+  font-size: 0.95rem;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
 }
