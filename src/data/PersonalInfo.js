@@ -8,5 +8,5 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/guangning-li/",
   github: "https://github.com/gngnggnn1",
   email: "guangning.li@outlook.com",
-  resumePdf: "/resume.pdf" // Ensure resume.pdf is in the public folder
+  resumePdf: "/resume.pdf"
 };
