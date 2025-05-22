@@ -1,6 +1,6 @@
-// src/App.js
+
 import React from 'react';
-import './App.css'; // Our main stylesheet
+import './App.css'; // Main stylesheet
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
@@ -11,12 +11,8 @@ import Resume from './components/Resume';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
-import CoursesSection from './components/CoursesSection'; // Import CoursesSection
+import CoursesSection from './components/CoursesSection';
 import { personalInfo } from './data/PersonalInfo';
-
-// --- Configuration Data ---
-
-// --- End Configuration Data ---
 
 function App() {
   const [showScroll, setShowScroll] = useState(false);
@@ -44,7 +40,7 @@ function App() {
       <Header name={personalInfo.name} />
 
       <main>
-        <Section id="hero"> {/* No title for hero, direct content */}
+        <Section id="hero">
           <p style={{ fontSize: '1.4rem', textAlign: 'center', fontWeight: '500', marginTop: '-10px', marginBottom: '30px' }}>
             {personalInfo.tagline}
           </p>
