@@ -58,16 +58,16 @@ function App() {
             <Experiences />
           </Section>
 
-          <Section title="Projects" id="portfolio">
-            <Projects />
-          </Section>
-
           <Section title="Certifications" id="certifications">
             <Certifications />
           </Section>
 
           <Section title="Courses" id="courses">
             <CoursesSection /> {/* Add CoursesSection here */}
+          </Section>
+
+          <Section title="Projects" id="projects">
+            <Projects />
           </Section>
 
           <Section title="My Resume" id="resume">
