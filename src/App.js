@@ -63,7 +63,7 @@ function App() {
           </Section>
 
           <Section title="Courses" id="courses">
-            <CoursesSection /> {/* Add CoursesSection here */}
+            <CoursesSection />
           </Section>
 
           <Section title="Projects" id="projects">
