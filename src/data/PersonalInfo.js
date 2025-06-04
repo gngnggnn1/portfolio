@@ -1,5 +1,5 @@
 export const personalInfo = {
-  name: "Guang-Ning Li",
+  name: "Guangning Li",
   tagline: "Cybersecurity Specialist | Master of Information Security Student @ UVic",
   bio: [ // Use an array for paragraphs
     "Hello! I’m a grad student in Information Security with a passion for building secure, reliable, and practical digital systems. I enjoy working with modern tech and finding smart solutions to real-world problems.",

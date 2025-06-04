@@ -20,7 +20,6 @@ const certificationsData = [
     date: "July 10, 2024",
     link: "https://www.credly.com/badges/8295ba38-33b6-40c6-9e40-6301f38edc85/public_url" // If no link
   },
-  // Add more certifications here
 ];
 
 export default certificationsData;
