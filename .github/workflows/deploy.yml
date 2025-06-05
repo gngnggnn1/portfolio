@@ -1,0 +1,93 @@
+name: Deploy React App to OCI
+
+on:
+  push:
+    branches:
+      - main # Or your deployment branch (e.g., master, production)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Use a Linux runner provided by GitHub
+
+    steps:
+      # 1. Checkout your repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (React typically needs Node.js to build)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # Or your project's required Node.js version (e.g., '16', '20')
+          cache: "npm" # Cache npm dependencies for faster builds
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci # 'ci' is generally preferred for CI environments over 'install'
+
+      # 4. Build the React application
+      - name: Build React application
+        run: npm run build # This should create the 'build' directory
+
+      # 5. Archive the build output
+      - name: Archive build folder
+        run: tar -czvf build_artifact.tar.gz build # Archive the 'build' directory
+
+      # --- DEPLOY TO OCI INSTANCE ---
+      - name: Set up SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.OCI_SSH_PRIVATE_KEY }}
+
+      - name: Add OCI host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.OCI_INSTANCE_IP }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy build artifact to OCI instance
+        run: |
+          scp build_artifact.tar.gz ${{ secrets.OCI_SSH_USER }}@${{ secrets.OCI_INSTANCE_IP }}:/tmp/build_artifact.tar.gz
+
+      - name: Execute remote deployment commands
+        run: |
+          ssh ${{ secrets.OCI_SSH_USER }}@${{ secrets.OCI_INSTANCE_IP }} << 'EOF'
+            # --- Commands to run on the OCI instance ---
+            echo "--- Starting remote deployment on server ---"
+
+            # Define target path from secrets (parent of 'build' folder)
+            TARGET_PARENT_PATH="${{ secrets.OCI_TARGET_PATH }}" # Should be /var/www/my-portfolio
+
+            echo "Ensuring target parent directory exists: $TARGET_PARENT_PATH"
+            sudo mkdir -p "$TARGET_PARENT_PATH"
+            # Ensure the deployment user can write here or has sudo for the next steps
+            # Example: sudo chown ${{ secrets.OCI_SSH_USER }}:${{ secrets.OCI_SSH_USER }} "$TARGET_PARENT_PATH" (if not already set)
+
+            echo "Removing old build directory at $TARGET_PARENT_PATH/build (if it exists)..."
+            sudo rm -rf "$TARGET_PARENT_PATH/build"
+
+            echo "Extracting new build artifact to $TARGET_PARENT_PATH..."
+            sudo tar -xzvf /tmp/build_artifact.tar.gz -C "$TARGET_PARENT_PATH" 
+            # This will create $TARGET_PARENT_PATH/build
+
+            echo "Cleaning up temporary artifact on server..."
+            sudo rm /tmp/build_artifact.tar.gz
+
+            # --- Optional: Set permissions for the web server ---
+            # If Nginx/Apache runs as www-data, it needs to read these files
+            echo "Setting permissions for web server..."
+            sudo chown -R www-data:www-data "$TARGET_PARENT_PATH/build"
+            sudo find "$TARGET_PARENT_PATH/build" -type d -exec chmod 755 {} \;
+            sudo find "$TARGET_PARENT_PATH/build" -type f -exec chmod 644 {} \;
+
+            # --- Optional: Reload web server if needed ---
+            RELOAD_COMMAND="${{ secrets.OCI_WEB_SERVER_RELOAD_COMMAND }}"
+            if [ -n "$RELOAD_COMMAND" ]; then
+              echo "Reloading web server: $RELOAD_COMMAND"
+              $RELOAD_COMMAND # This likely needs sudo
+            else
+              echo "No web server reload command specified."
+            fi
+            
+            echo "--- Remote deployment finished ---"
+          EOF
