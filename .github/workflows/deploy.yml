@@ -55,39 +55,31 @@ jobs:
             # --- Commands to run on the OCI instance ---
             echo "--- Starting remote deployment on server ---"
 
-            # Define target path from secrets (parent of 'build' folder)
-            TARGET_PARENT_PATH="${{ secrets.OCI_TARGET_PATH }}" # Should be /var/www/my-portfolio
+            # Define target path from secrets
+            TARGET_PARENT_PATH="${{ secrets.OCI_TARGET_PATH }}"
+
+            # --- Safety Check: Exit if the target path is not set ---
+            if [ -z "$TARGET_PARENT_PATH" ]; then
+              echo "FATAL: OCI_TARGET_PATH secret is not set. Aborting." >&2
+              exit 1
+            fi
 
             echo "Ensuring target parent directory exists: $TARGET_PARENT_PATH"
             sudo mkdir -p "$TARGET_PARENT_PATH"
-            # Ensure the deployment user can write here or has sudo for the next steps
-            # Example: sudo chown ${{ secrets.OCI_SSH_USER }}:${{ secrets.OCI_SSH_USER }} "$TARGET_PARENT_PATH" (if not already set)
-
+            
             echo "Removing old build directory at $TARGET_PARENT_PATH/build (if it exists)..."
             sudo rm -rf "$TARGET_PARENT_PATH/build"
 
             echo "Extracting new build artifact to $TARGET_PARENT_PATH..."
             sudo tar -xzvf /tmp/build_artifact.tar.gz -C "$TARGET_PARENT_PATH" 
-            # This will create $TARGET_PARENT_PATH/build
 
             echo "Cleaning up temporary artifact on server..."
             sudo rm /tmp/build_artifact.tar.gz
-
-            # --- Optional: Set permissions for the web server ---
-            # If Nginx/Apache runs as www-data, it needs to read these files
+            
             echo "Setting permissions for web server..."
             sudo chown -R www-data:www-data "$TARGET_PARENT_PATH/build"
             sudo find "$TARGET_PARENT_PATH/build" -type d -exec chmod 755 {} \;
             sudo find "$TARGET_PARENT_PATH/build" -type f -exec chmod 644 {} \;
 
-            # --- Optional: Reload web server if needed ---
-            RELOAD_COMMAND="${{ secrets.OCI_WEB_SERVER_RELOAD_COMMAND }}"
-            if [ -n "$RELOAD_COMMAND" ]; then
-              echo "Reloading web server: $RELOAD_COMMAND"
-              $RELOAD_COMMAND # This likely needs sudo
-            else
-              echo "No web server reload command specified."
-            fi
-            
             echo "--- Remote deployment finished ---"
           EOF
