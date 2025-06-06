@@ -3,14 +3,14 @@ name: Deploy React App to OCI
 on:
   push:
     branches:
-      - main # Or your deployment branch (e.g., master, production)
+      - main # Or deployment branch (e.g., master, production)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # Use a Linux runner provided by GitHub
 
     steps:
-      # 1. Checkout your repository code
+      # 1. Checkout repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # Or your project's required Node.js version (e.g., '16', '20')
+          node-version: "18" # Or project's required Node.js version (e.g., '16', '20')
           cache: "npm" # Cache npm dependencies for faster builds
 
       # 3. Install dependencies
