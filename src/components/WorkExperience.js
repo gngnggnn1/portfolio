@@ -14,7 +14,7 @@ function Experiences() {
       </div>
       <div>
         <h3>Teaching Assistant</h3>
-        <p>Company: University of Victoria</p>
+        <p>University of Victoria</p>
         <p>Sep 2024 – Apr 2025</p>
         <ul>
           <li>Collaborated with professors and fellow TAs to support student learning through consistent grading and academic coordination.</li>
