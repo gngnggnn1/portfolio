@@ -1,14 +1,13 @@
 const portfolioProjects = [
   {
     id: 1,
-    title: "Linux Gobang (Five-in-a-Row)",
-    description: "A command-line Gobang (Five-in-a-Row) game designed for the Linux environment. It's written in C++ and utilizes the ncurses library to create a text-based graphical interface in the terminal. The game supports player vs. player and player vs. AI modes, along with features like undoing moves, resigning, and saving/loading game progress.",
-    githubLink: "https://github.com/gngnggnn1/LinuxGobang"
+    title: "Virtualized Zero-Trust Enterprise Network (ECE 519C Project)",
+    description: "Designed and configured a virtualized zero-trust network using Palo Alto NGFW and Cisco ASA for a simulated corporate environment. Implemented firewall rules, HTTPS inspection, URL filtering, antivirus scanning, and PAN-OS IPS to secure inter-segment traffic. Simulated attacks using Metasploit to test defenses against SMB exploits, ensuring secure communication."
   },
   {
     id: 2,
     title: "Full-Stack E-commerce Platform",
-    description: "A comprehensive e-commerce platform built with a Spring Boot backend and a Vue.js frontend. The backend integrates MySQL for data storage, Mybatis-Plus for ORM, Redis for caching, RabbitMQ for asynchronous messaging, Elasticsearch for product search, and Spring Security with JWT for authentication. Features include user registration/login, product browsing, shopping cart, order management, and an admin panel for managing products, orders, and users.",
+    description: "A comprehensive e-commerce platform built with a Spring Boot backend and a Vue.js dynamic frontend. The backend integrates MySQL for data storage, Mybatis-Plus for ORM, Redis for caching, RabbitMQ for asynchronous messaging, Elasticsearch for product search, and Spring Security with JWT for authentication. Features include user registration/login, product browsing, shopping cart, order management, and an admin panel for managing products, orders, and users.",
     githubLink: "https://github.com/gngnggnn1/ecommercePlatform"
   },
   {
@@ -28,8 +27,9 @@ const portfolioProjects = [
   },
   {
     id: 6,
-    title: "Virtualized Zero-Trust Network Security (ECE 519C Project)",
-    description: "Designed and configured a virtualized zero-trust network using Palo Alto NGFW and Cisco ASA for a simulated corporate environment. Implemented firewall rules, HTTPS inspection, URL filtering, antivirus scanning, and PAN-OS IPS to secure inter-segment traffic. Simulated attacks using Metasploit to test defenses against SMB exploits, ensuring secure communication."
+    title: "Linux Gobang (Five-in-a-Row)",
+    description: "A command-line Gobang (Five-in-a-Row) game designed for the Linux environment. It's written in C++ and utilizes the ncurses library to create a text-based graphical interface in the terminal. The game supports player vs. player and player vs. AI modes, along with features like undoing moves, resigning, and saving/loading game progress.",
+    githubLink: "https://github.com/gngnggnn1/LinuxGobang"
   },
   {
     id: 7,
