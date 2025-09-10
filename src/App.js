@@ -66,9 +66,9 @@ function App() {
             <Projects />
           </Section>
 
-          <Section title="My Resume" id="resume">
+          {/* <Section title="My Resume" id="resume">
             <Resume />
-          </Section>
+          </Section> */}
 
         <Section title="Connect With Me" id="connect">
           <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
