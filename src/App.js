@@ -7,7 +7,6 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import Experiences from './components/WorkExperience';
 import Header from './components/Header';
 import Section from './components/Section';
-import Resume from './components/Resume';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -65,10 +64,6 @@ function App() {
           <Section title="Projects" id="projects">
             <Projects />
           </Section>
-
-          {/* <Section title="My Resume" id="resume">
-            <Resume />
-          </Section> */}
 
         <Section title="Connect With Me" id="connect">
           <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
